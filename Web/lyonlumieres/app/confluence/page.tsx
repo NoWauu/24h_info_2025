@@ -1,0 +1,10 @@
+export default function Confluence() {
+    return (
+        <div>
+            <h1>Musée des Confluence</h1>
+            <p>Après avoir exploré le siècle des Lumières qui fit rayonner Lyon comme foyer intellectuel, puis la Fête des Lumières qui illumine chaque année la ville de créativité et de ferveur populaire, un dernier regard s’impose vers un lieu où ces deux héritages se rejoignent : le Musée des Confluences.</p>
+            <p>Situé à la pointe sud de la Presqu’île, à la jonction du Rhône et de la Saône, ce musée ouvert en 2014 ne se contente pas d’exposer des objets. Il raconte le monde. Dans son architecture audacieuse, œuvre du cabinet Coop Himmelb(l)au, se lit déjà une ambition : déconstruire les cadres établis pour mieux relier les savoirs. Les vastes espaces internes accueillent des collections allant des origines de l’univers aux cultures contemporaines, de la biologie à la mythologie. Chaque exposition est pensée comme un récit : celui de la complexité du réel et de notre place en son sein. On y vient non pas pour apprendre de manière linéaire, mais pour comprendre en réseau, à la manière des encyclopédistes du XVIIIe siècle.</p>
+            <p>Lumière naturelle, artificielle, symbolique : au Musée des Confluences, elle circule partout. À travers les verrières du &apos;Cristal&apos;, dans les dispositifs interactifs, dans les parcours scénographiés. C’est un lieu de transition et de transformation, qui prolonge les Lumières du passé par celles du savoir contemporain. Même au-delà des murs, l’institution rayonne : par ses publications, ses partenariats avec la recherche, et son ouverture à tous les publics. En choisissant de conclure notre parcours lyonnais par cette halte, nous faisons le pari que la lumière, aujourd’hui encore, éclaire la connaissance — et qu’à Lyon, elle le fait avec éclat.</p>
+        </div>
+    );
+}
