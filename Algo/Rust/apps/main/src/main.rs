@@ -1,5 +1,10 @@
-use main_lib::add;
+use std::fs;
 
 fn main() {
-    println!("Hello, world ! 1 + 1 = {}", add(1, 1));
+    let input = fs::read_to_string("../inputs/peinture11.txt").unwrap();
+
+    println!("{}", input);
+
+
+
 }
