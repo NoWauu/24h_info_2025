@@ -10,7 +10,7 @@ export default function Fete() {
                 Imaginez une ville qui, chaque hiver, se transforme en un théâtre de lumière. Les rues deviennent des toiles, les monuments se parent de couleurs féeriques, et des milliers de visages levés vers le ciel s’illuminent d’émerveillement. Bienvenue à Lyon, au cœur de l'une des plus grandes célébrations lumineuses du monde : la Fête des Lumières.
                 </p>
                 <Image
-                    src="/Lyon.jpg"
+                    src="/Lyon.png"
                     alt="Vue de Lyon illuminée"
                     className="rounded-xl shadow-md"
                     width={300}
