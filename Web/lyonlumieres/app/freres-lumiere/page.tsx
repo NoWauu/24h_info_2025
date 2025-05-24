@@ -6,6 +6,7 @@ import LumiereTimeline from "@/components/LumiereTimeline";
 import RevealSection from "@/components/RevealSection";
 import TorchRevealImage from "@/components/TorchRevealImage";
 import lightStyles from "../../styles/light.module.css";
+import AutoTorchRevealText from "@/components/AutoTorchRevealText";
 
 export default function FreresLumierePage() {
   const [showVideo, setShowVideo] = useState(false);
@@ -35,11 +36,19 @@ export default function FreresLumierePage() {
     <main className="bg-black text-white px-6 py-12 space-y-20">
       {/* 1. Header sobre */}
       <section className="text-center space-y-4">
-        <h1 className="text-4xl font-bold">Les Frères Lumière</h1>
-        <p className="text-gray-400 max-w-2xl mx-auto">
-          Inventeurs lyonnais du cinématographe, pionniers de l'image en
-          mouvement, Auguste et Louis Lumière ont illuminé l'histoire du cinéma.
-        </p>
+        <AutoTorchRevealText
+          text="Les Frères Lumière"
+          fontSize="text-4xl"
+          duration={2000}
+        />
+        <AutoTorchRevealText
+          text="Inventeurs lyonnais du cinématographe, pionniers de l'image en mouvement, Auguste et Louis Lumière ont illuminé l'histoire du cinéma."
+          fontSize="text-base"
+          duration={2500}
+          //   direction="right"
+          delay={2000}
+          className="max-w-2xl mx-auto text-gray-400 font-normal block"
+        />
       </section>
 
       {/* 2. Présentation statique */}
@@ -70,10 +79,35 @@ export default function FreresLumierePage() {
       <RevealSection>
         <section className="text-center">
           {!showVideo ? (
-            <div>
-              <p className="text-gray-400 mt-2">
-                Cliquez pour voir le cinéma naître...
-              </p>
+            <div className="relative flex justify-center items-center h-[250px]">
+              {revealRatio < 1 ? (
+                <p className="text-gray-400 mt-2">
+                  Cliquez pour voir le cinéma naître...
+                </p>
+              ) : (
+                <motion.button
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.95 }}
+                  onMouseMove={(e) => {
+                    const rect = e.currentTarget.getBoundingClientRect();
+                    const dx = e.clientX - (rect.left + rect.width / 2);
+                    const dy = e.clientY - (rect.top + rect.height / 2);
+                    const dist = Math.sqrt(dx * dx + dy * dy);
+                    const maxDist = Math.sqrt(
+                      (rect.width / 2) ** 2 + (rect.height / 2) ** 2
+                    );
+                    const glow = 0.2 + Math.max(0, 1 - dist / maxDist);
+                    e.currentTarget.style.boxShadow = `0 0 30px rgba(255, 255, 200, ${glow})`;
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.boxShadow = "none";
+                  }}
+                  onClick={() => setShowVideo(true)}
+                  className="text-5xl text-yellow-200 font-bold bg-black/40 backdrop-blur-md border border-yellow-400 rounded-full px-6 py-4 transition duration-300"
+                >
+                  ▶
+                </motion.button>
+              )}
             </div>
           ) : (
             <motion.div
