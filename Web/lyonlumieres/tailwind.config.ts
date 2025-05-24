@@ -55,7 +55,11 @@ export default {
   			lg: 'var(--radius)',
   			md: 'calc(var(--radius) - 2px)',
   			sm: 'calc(var(--radius) - 4px)'
-  		}
+  		},
+		transitionDuration: {
+			"1500": "1500ms",
+			"5000": "5000ms"
+		},
   	}
   },
   plugins: [require("tailwindcss-animate")],
