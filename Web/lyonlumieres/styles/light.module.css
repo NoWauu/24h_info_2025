@@ -1,0 +1,11 @@
+/* styles/light.module.css */
+
+.citation {
+  transition: color 0.3s ease, text-shadow 0.3s ease;
+  color: #888;
+}
+
+.citation:hover {
+  color: white;
+  text-shadow: 0 0 10px #fff, 0 0 20px #ffd700;
+}
