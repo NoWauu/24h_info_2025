@@ -55,15 +55,15 @@ export default function Confluence() {
       {/* Initial Content */}
       {!divedIn && (
         <div className="relative z-20 text-center text-white px-6">
-          <h1 className="text-5xl font-bold mb-4 drop-shadow-lg">Dive Into the Image</h1>
+          <h1 className="text-5xl font-bold mb-4 drop-shadow-lg">Musée de Confluence</h1>
           <p className="mb-8 text-lg drop-shadow-md max-w-md mx-auto">
-            Click the image to zoom in and explore.
+            Découvrez le Musée des Confluences, un lieu où l&apos;histoire et la modernité se rencontrent.
           </p>
           <button 
             onClick={() => setDivedIn(true)}
             className="px-6 py-3 bg-yellow-400 text-black font-semibold rounded shadow-lg hover:bg-yellow-500 transition"
           >
-            Dive In
+            Découvrir
           </button>
         </div>
       )}
