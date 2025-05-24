@@ -1,26 +1,29 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+
 declare global {
   interface Window {
     Hands: any;
     Camera: any;
   }
 }
+
 export default function HandGestureDetector({
   onGesture,
 }: {
   onGesture: (gesture: "open" | "fist" | "thumbs_up") => void;
 }) {
   const videoRef = useRef<HTMLVideoElement>(null);
+  const lastGestureRef = useRef<string | null>(null);
+  const gestureStartTimeRef = useRef<number | null>(null);
+  const lastTriggerTimeRef = useRef<number>(0);
 
   useEffect(() => {
     let camera: any;
 
     const load = async () => {
-      // @ts-ignore
       const Hands = window.Hands;
-      // @ts-ignore
       const Camera = window.Camera;
 
       const hands = new Hands({
@@ -50,6 +53,8 @@ export default function HandGestureDetector({
           pinky: isFingerUp(20, 18),
         };
 
+        let currentGesture: "open" | "fist" | "thumbs_up" | null = null;
+
         if (
           fingers.thumb &&
           fingers.index &&
@@ -57,7 +62,7 @@ export default function HandGestureDetector({
           fingers.ring &&
           fingers.pinky
         ) {
-          onGesture("open");
+          currentGesture = "open";
         } else if (
           !fingers.thumb &&
           !fingers.index &&
@@ -65,7 +70,7 @@ export default function HandGestureDetector({
           !fingers.ring &&
           !fingers.pinky
         ) {
-          onGesture("fist");
+          currentGesture = "fist";
         } else if (
           fingers.thumb &&
           !fingers.index &&
@@ -73,7 +78,31 @@ export default function HandGestureDetector({
           !fingers.ring &&
           !fingers.pinky
         ) {
-          onGesture("thumbs_up");
+          currentGesture = "thumbs_up";
+        }
+
+        const now = Date.now();
+
+        if (currentGesture && currentGesture === lastGestureRef.current) {
+          // Vérifie si ça fait 2 secondes que le geste est stable
+          if (
+            gestureStartTimeRef.current &&
+            now - gestureStartTimeRef.current >= 2000 &&
+            now - lastTriggerTimeRef.current >= 5000
+          ) {
+            onGesture(currentGesture);
+            lastTriggerTimeRef.current = now;
+            gestureStartTimeRef.current = null;
+            lastGestureRef.current = null;
+          }
+        } else if (currentGesture) {
+          // Nouveau geste détecté → démarre le timer
+          lastGestureRef.current = currentGesture;
+          gestureStartTimeRef.current = now;
+        } else {
+          // Aucun geste → reset
+          lastGestureRef.current = null;
+          gestureStartTimeRef.current = null;
         }
       });
 
@@ -85,14 +114,8 @@ export default function HandGestureDetector({
           width: 640,
           height: 480,
         });
-        camera = new Camera(videoRef.current, {
-          onFrame: async () => {
-            await hands.send({ image: videoRef.current! });
-          },
-          width: 640,
-          height: 480,
-        });
-        await navigator.mediaDevices.getUserMedia({ video: true });
+
+        await navigator.mediaDevices.getUserMedia({ video: true }); // 🔒 déverrouille l'accès à la caméra
         camera.start();
       }
     };
