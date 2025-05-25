@@ -13,6 +13,7 @@ We're not gonna talk about this part... right ?
 ## 3rd part : Cybersec
 
 see [CTFer.io repo](https://github.com/ctfer-io/24hiut2025/tree/main/challenges) for challenges
+Thanks to them for all their investment and efforts, especially when their infra shutdowned at 5:30am 🥇
 
 This part was really fun, it was a CTF with challenges available at different skill level.
 I (NoWay_y still) took the [Sodastream chall](https://github.com/ctfer-io/24hiut2025/tree/main/challenges/forensic/sodastream) and [Kubra chal](https://github.com/ctfer-io/24hiut2025/tree/main/challenges/infra/kubrac), which I ended not finishing either of them :(
